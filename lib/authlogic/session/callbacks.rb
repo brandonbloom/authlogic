@@ -76,8 +76,10 @@ module Authlogic
           end
         end
       end
+
       
       private
+
         METHODS.each do |method|
           class_eval <<-"end_eval", __FILE__, __LINE__
             def #{method}
@@ -85,9 +87,12 @@ module Authlogic
             end
           end_eval
         end
+
+        attr_accessor :giant_callback_hack
       
         def persist
-          run_callbacks(:persist) { |result, object| result == true }
+          self.giant_callback_hack = false
+          run_callbacks(:persist)# { |result, object| result == true }      # run_callbacks' block no longer allows per-callback cancelation
         end
         
         def save_record(alternate_record = nil)

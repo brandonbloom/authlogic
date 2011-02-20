@@ -38,11 +38,12 @@ module Authlogic
           end
         
           def persist_by_http_auth
+            return if giant_callback_hack
             controller.authenticate_with_http_basic do |login, password|
               if !login.blank? && !password.blank?
                 send("#{login_field}=", login)
                 send("#{password_field}=", password)
-                return valid?
+                self.giant_callback_hack = valid?
               end
             end
         

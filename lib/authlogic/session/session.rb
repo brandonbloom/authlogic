@@ -30,8 +30,9 @@ module Authlogic
         private
           # Tries to validate the session from information in the session
           def persist_by_session
+            return if giant_callback_hack
             persistence_token, record_id = session_credentials
-            if !persistence_token.nil?
+            self.giant_callback_hack = if !persistence_token.nil?
               # Allow finding by persistence token, because when records are created the session is maintained in a before_save, when there is no id.
               # This is done for performance reasons and to save on queries.
               record = record_id.nil? ?

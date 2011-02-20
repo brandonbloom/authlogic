@@ -63,9 +63,10 @@ module Authlogic
       module InstanceMethods
         private
           def persist_by_params
+            return if giant_callback_hack
             return false if !params_enabled?
             self.unauthorized_record = search_for_record("find_by_single_access_token", params_credentials)
-            self.single_access = valid?
+            self.giant_callback_hack = self.single_access = valid?
           end
           
           def params_enabled?
