@@ -1,5 +1,7 @@
 = Authlogic
 
+{<img src="https://badges.gitter.im/Join%20Chat.svg" alt="Join the chat at https://gitter.im/brandonbloom/authlogic">}[https://gitter.im/brandonbloom/authlogic?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge]
+
 Authlogic is a clean, simple, and unobtrusive ruby authentication solution.
 
 A code example can replace a thousand words...
